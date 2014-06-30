@@ -1,0 +1,60 @@
+﻿
+<Window x:Name="MainToDoWindow"
+        x:Class="ToDoList.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="To-Do List" Height="317" Width="510" Background="#FFE0E8F5">
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Grid>
+        <DockPanel Margin="10">
+            <StackPanel DockPanel.Dock="Right" Margin="10,0">
+                <TextBlock Margin="0,0,0,10" Text="To-Do List" FontWeight="Bold"/>
+                <Button Content="+" x:Name="AddTaskButton" Click="add_click" Width="40" Cursor="Hand" ToolTip="Add a task to your list."/>
+                <Button Content="e" x:Name="EditTaskButton" Click="edit_click" Width="40" Cursor="Hand" ToolTip="Edit the selected current task."/>
+                <Button Content="-" x:Name="RemoveTaskButton" Click="remove_click" Width="40" Cursor="Hand" ToolTip="Remove the selected text."/>
+            </StackPanel>
+            <ListView x:Name="ToDoListView">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="300" Header="Task" DisplayMemberBinding="{Binding task}" />
+                        <GridViewColumn Width="75" Header="Due Date" DisplayMemberBinding="{Binding dueDate}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+        <Grid x:Name="InputBox" Visibility="Collapsed">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border
+            MinWidth="250"
+            Background="AliceBlue" 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Margin="5" Text="Enter a task and due date." FontWeight="Bold" />
+                    <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="InputTextBox"/>
+                    <DatePicker x:Name="DatePickerBox"
+                                HorizontalAlignment="Left"
+		                        Margin="10,10,0,0"
+		                        VerticalAlignment="Top"
+		                        SelectedDateChanged="selected_date_changed"
+                                SelectedDate="{x:Static sys:DateTime.Now}">
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="IsReadOnly" Value="True"/>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="YesButton" Margin="5" Content="Yes" Background="{x:Null}" Click="yes_click" Cursor="Hand"/>
+                        <Button x:Name="CancelButton" Margin="5" Content="Cancel" Background="{x:Null}" Click="cancel_click" Cursor="Hand"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
